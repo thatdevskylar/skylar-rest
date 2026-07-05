@@ -1,0 +1,245 @@
+/* ==========================================================
+   Skylar Furri — Coming Soon
+   Palette:
+     --bg        #0c0808  near-black with a warm red undertone
+     --surface   #1a1010  panel background
+     --line      #2c1a1a  hairline borders
+     --accent    #721e1e  brand red (Discord embed color)
+     --accent-2  #a83a2c  brighter red for hover/glow
+     --text      #f2e9e4  warm off-white
+     --muted     #8a7370  secondary text
+   Type:
+     Display  — "Alierons" (custom, /fonts/alierons.otf)
+     Body/log — ui-monospace stack (terminal feel for the git log)
+   ========================================================== */
+
+@font-face {
+    font-family: "Alierons";
+    src: url("/fonts/alierons.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --bg: #0c0808;
+    --surface: #1a1010;
+    --line: #2c1a1a;
+    --accent: #721e1e;
+    --accent-2: #a83a2c;
+    --text: #f2e9e4;
+    --muted: #8a7370;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 50% -10%, rgba(114, 30, 30, 0.25), transparent 60%),
+        var(--bg);
+    color: var(--text);
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.wrap {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+}
+
+.pfp-frame {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    margin-bottom: 12px;
+    box-shadow: 0 0 40px rgba(114, 30, 30, 0.45);
+}
+
+.pfp {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    background: var(--surface);
+}
+
+.headline {
+    font-family: "Alierons", ui-serif, Georgia, serif;
+    font-size: clamp(2.6rem, 9vw, 4.2rem);
+    letter-spacing: 0.01em;
+    margin: 0;
+    line-height: 1.05;
+    color: var(--text);
+    text-shadow: 0 0 30px rgba(168, 58, 44, 0.35);
+}
+
+.subline {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0 0 28px 0;
+    letter-spacing: 0.02em;
+}
+
+/* ---- git log panel (the signature element) ---- */
+
+.log {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: left;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.log-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #150d0d;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.78rem;
+}
+
+.log-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-2);
+    box-shadow: 0 0 8px var(--accent-2);
+    flex-shrink: 0;
+}
+
+.log-title {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.log-repo {
+    margin-left: auto;
+    color: var(--muted);
+}
+
+.log-version {
+    color: var(--accent-2);
+    background: rgba(168, 58, 44, 0.12);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.log-body {
+    padding: 14px 16px 16px;
+}
+
+.log-empty {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 4px 0;
+}
+
+.timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: var(--line);
+}
+
+.timeline-entry {
+    position: relative;
+    padding: 8px 0 8px 22px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 0.85rem;
+}
+
+.timeline-entry::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent-2);
+}
+
+.timeline-entry .hash {
+    color: var(--accent-2);
+    font-weight: 600;
+}
+
+.timeline-entry .msg {
+    color: var(--text);
+    flex: 1;
+    min-width: 140px;
+}
+
+.timeline-entry .date {
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-left: auto;
+}
+
+.footer {
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .headline,
+    .log {
+        animation: rise 0.6s ease-out both;
+    }
+    .log {
+        animation-delay: 0.1s;
+    }
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
